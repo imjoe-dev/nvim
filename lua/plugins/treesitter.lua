@@ -22,6 +22,10 @@ return {
 					"css",
 					"yaml",
 					"javascript",
+					"go",
+					"gomod",
+					"gosum",
+					"gitignore",
 				},
 				sync_install = false,
 				highlight = {
