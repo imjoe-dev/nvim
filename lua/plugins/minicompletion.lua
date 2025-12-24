@@ -1,6 +1,7 @@
 return {
   "nvim-mini/mini.completion",
   version = false,
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     {
       "nvim-mini/mini.icons",
