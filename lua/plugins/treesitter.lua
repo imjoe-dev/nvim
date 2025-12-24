@@ -2,52 +2,35 @@ return {
   "nvim-treesitter/nvim-treesitter",
   branch = "main",
   version = false,
-  event = { "BufReadPost", "BufNewFile" },
+  lazy = false,
   build = ":TSUpdate",
   dependencies = {
     { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
   },
-  opts = {
-    indent = { enable = true },
-    highlight = { enable = true },
-    auto_install = true,
-    ensure_installed = {
-      "c",
-      "html",
-      "javascript",
-      "json",
-      "jsonc",
-      "lua",
-      "markdown",
-      "toml",
-      "tsx",
-      "typescript",
-      "yaml",
-      "go",
-      "gomod",
-      "gosum",
-    },
-    textobjects = {
-      select = {
-        enable = true,
-        keymaps = {
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["ap"] = "@parameter.outer",
-          ["ip"] = "@parameter.inner",
-          ["al"] = "@loop.outer",
-          ["il"] = "@loop.inner",
-        },
-        include_surrounding_whitespace = true,
-      },
-      move = {
-        enable = true,
-        set_jumps = true,
-        keys = {
-          ["]f"] = "@function.outer",
-          ["[f"] = "@function.outer",
-        },
-      },
-    },
-  },
-}
+  config = function()
+    local ts = require("nvim-treesitter")
+
+    ts.install({ "lua", "go", "gomod", "gosum" })
+
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("ui.treesitter", { clear = true }),
+      pattern = { "*" },
+      callback = function(e)
+        local lang = e.match
+
+        local ok, _ = pcall(ts.install, { lang }, { summary = true })
+        if not ok then
+          return
+        end
+
+        ok, _ = pcall(vim.treesitter.start, e.buf, lang)
+        if not ok then
+          return
+        end
+
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      end
+    })
+  end
+ }
