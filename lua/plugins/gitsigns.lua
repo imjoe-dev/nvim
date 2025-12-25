@@ -1,6 +1,6 @@
 return {
 	"lewis6991/gitsigns.nvim",
-	lazy = false,
+	event = { "BufReadPre", "BufNewFile" },
 	opts = {
 		attach_to_untracked = true,
 		on_attach = function(buffer)
