@@ -3,6 +3,7 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	opts = {
 		attach_to_untracked = true,
+		signs_staged_enable = true,
 		on_attach = function(buffer)
 			local gitsigns = require("gitsigns")
 
