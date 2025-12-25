@@ -2,13 +2,13 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd("TextYankPost", {
-  group = augroup("highlight_yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank({ timeout = 150 })
-  end,
+	group = augroup("highlight_yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank({ timeout = 150 })
+	end,
 })
 
 autocmd({ "FocusGained", "BufEnter" }, {
-  group = augroup("checktime", { clear = true }),
-  command = "checktime",
+	group = augroup("checktime", { clear = true }),
+	command = "checktime",
 })

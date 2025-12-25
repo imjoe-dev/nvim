@@ -27,7 +27,7 @@ map("n", "<leader>p", '"+p', opts)
 
 map("n", "<leader>bd", ":bd<CR>", opts)
 map("n", "<leader>bn", ":bnext<CR>", opts)
-map("n", "<leader>bp",  ":bprevious<CR>", opts)
+map("n", "<leader>bp", ":bprevious<CR>", opts)
 
 map("n", "<leader>w", ":write<CR>", opts)
 map("n", "<leader>q", ":quit<CR>", opts)
