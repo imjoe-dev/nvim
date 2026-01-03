@@ -32,5 +32,3 @@ map("n", "<leader>bp", ":bprevious<CR>", opts)
 map("n", "<leader>w", ":write<CR>", opts)
 map("n", "<leader>q", ":quit<CR>", opts)
 map("n", "<leader>h", ":nohlsearch<CR>", opts)
-
-map("n", ";", ":", { noremap = true })
