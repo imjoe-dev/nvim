@@ -7,7 +7,7 @@ return {
 		{ "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "delete non pinned" },
 		{ "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "close right" },
 		{ "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "close left" },
-		{ "<leader>bo", "<Cms>BufferLineCloseOthers<CR>", desc = "close others" },
+		{ "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "close others" },
 		{ "<S-h>", "<Cmd>BufferLineCyclePrev<CR>", desc = "prev buffer" },
 		{ "<S-l>", "<Cmd>BufferLineCycleNext<CR>", desc = "next buffer" },
 		{ "[B", "<Cmd>BufferLineMovePrev<CR>", desc = "move buffer prev" },
