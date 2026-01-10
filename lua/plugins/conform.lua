@@ -16,6 +16,10 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			go = { "gofumpt" },
+			javascript = { "oxlint", "oxfmt" },
+			typescript = { "oxlint", "oxfmt" },
+			javascriptreact = { "oxlint", "oxfmt" },
+			typescriptreact = { "oxlint", "oxfmt" },
 		},
 		format_on_save = { timeout_ms = 500 },
 	},
