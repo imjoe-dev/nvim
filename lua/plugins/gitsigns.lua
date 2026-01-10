@@ -12,7 +12,7 @@ return {
 			end
 
 			map("n", "]c", function()
-				if wim.wo.diff then
+				if vim.wo.diff then
 					vim.cmd.normal({ "]c", bang = true })
 				else
 					gitsigns.nav_hunk("next")
@@ -20,7 +20,7 @@ return {
 			end)
 
 			map("n", "[c", function()
-				if wim.wo.diff then
+				if vim.wo.diff then
 					vim.cmd.normal({ "[c", bang = true })
 				else
 					gitsigns.nav_hunk("prev")
