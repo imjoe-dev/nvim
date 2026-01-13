@@ -20,6 +20,7 @@ return {
 			typescript = { "oxlint", "oxfmt" },
 			javascriptreact = { "oxlint", "oxfmt" },
 			typescriptreact = { "oxlint", "oxfmt" },
+			css = { "oxlint", "oxfmt" },
 		},
 		format_on_save = { timeout_ms = 500 },
 	},
