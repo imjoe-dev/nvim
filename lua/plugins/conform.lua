@@ -21,6 +21,7 @@ return {
 			javascriptreact = { "oxlint", "oxfmt" },
 			typescriptreact = { "oxlint", "oxfmt" },
 			css = { "oxlint", "oxfmt" },
+			json = { "oxlint", "oxfmt" },
 		},
 		format_on_save = { timeout_ms = 500 },
 	},

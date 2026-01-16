@@ -35,6 +35,7 @@ return {
 
 		local on_attach = function(ev)
 			vim.bo[ev.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true, buffer = ev.buf })
 		end
 
 		vim.api.nvim_create_autocmd({ "LspAttach" }, {
