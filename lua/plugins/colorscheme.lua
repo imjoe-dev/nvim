@@ -1,8 +1,7 @@
 return {
-	"HoNamDuong/hybrid.nvim",
-	lazy = false,
-	opts = {},
+	"rebelot/kanagawa.nvim",
+	name = "kanagawa",
 	config = function()
-		vim.cmd.colorscheme("hybrid")
+		vim.cmd("colorscheme kanagawa-dragon")
 	end,
 }

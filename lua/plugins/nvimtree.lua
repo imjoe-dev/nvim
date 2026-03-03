@@ -23,6 +23,10 @@ return {
 			update_focused_file = {
 				enable = true,
 			},
+			git = {
+				enable = true,
+				ignore = false,
+			},
 		})
 
 		vim.api.nvim_create_autocmd({ "BufEnter", "QuitPre" }, {
