@@ -27,6 +27,17 @@ return {
 				enable = true,
 				ignore = false,
 			},
+			actions = {
+				open_file = {
+					window_picker = {
+						enable = true,
+						exclude = {
+							filetype = { "notify", "qf", "diff", "fugitive", "fugitiveblame" },
+							buftype = { "nofile", "terminal", "help", "quickfix", "nowrite" },
+						},
+					},
+				},
+			},
 		})
 
 		vim.api.nvim_create_autocmd({ "BufEnter", "QuitPre" }, {

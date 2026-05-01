@@ -30,5 +30,21 @@ map("n", "<leader>bn", ":bnext<CR>", opts)
 map("n", "<leader>bp", ":bprevious<CR>", opts)
 
 map("n", "<leader>w", ":write<CR>", opts)
-map("n", "<leader>q", ":quit<CR>", opts)
+map("n", "<leader>q", function()
+	local wins = vim.api.nvim_list_wins()
+	local real_wins = 0
+	for _, win in ipairs(wins) do
+		local buf = vim.api.nvim_win_get_buf(win)
+		local ft = vim.api.nvim_get_option_value("filetype", { buf = buf })
+		local cfg = vim.api.nvim_win_get_config(win)
+		if cfg.focusable and ft ~= "NvimTree" then
+			real_wins = real_wins + 1
+		end
+	end
+	if real_wins <= 1 then
+		vim.cmd("qa")
+	else
+		vim.cmd("quit")
+	end
+end, { noremap = true, silent = true, desc = "Smart quit" })
 map("n", "<leader>h", ":nohlsearch<CR>", opts)
