@@ -29,6 +29,10 @@ return {
 			"json",
 			"jsonc",
 
+			-- c/c++
+			"c",
+			"cpp",
+
 			"sql",
 			"html",
 			"css",
@@ -55,6 +59,8 @@ return {
 				"html",
 				"css",
 				"markdown",
+				"c",
+				"cpp",
 			},
 			callback = function()
 				vim.treesitter.start()
@@ -70,6 +76,8 @@ return {
 				"javascriptreact",
 				"json",
 				"sql",
+				"c",
+				"cpp",
 			},
 			callback = function()
 				vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -85,6 +93,8 @@ return {
 				"typescriptreact",
 				"javascript",
 				"javascriptreact",
+				"c",
+				"cpp",
 			},
 			callback = function()
 				vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

@@ -7,6 +7,7 @@ return {
 			"lua_ls",
 			"tsgo",
 			"gopls",
+			"clangd",
 		},
 	},
 	dependencies = {
