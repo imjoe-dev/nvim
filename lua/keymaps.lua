@@ -36,7 +36,7 @@ map_all("n", {
   { "<leader>Y", '"+Y', { desc = "copy line" } },
   { "<leader>p", '"+p', { desc = "paste clipboard" } },
 
-  { "<leader>bd", ":bd", { desc = "close current buffer" }},
+  { "<leader>bd", ":bd<CR>", { desc = "close current buffer" }},
 })
 
 map_all("v", {
