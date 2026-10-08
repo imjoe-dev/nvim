@@ -13,6 +13,7 @@ require("mini.notify").setup()
 require("mini.indentscope").setup()
 require("mini.tabline").setup()
 require("mini.jump2d").setup()
+require("mini.diff").setup()
 
 -- mini files
 local MiniFiles = require("mini.files")
