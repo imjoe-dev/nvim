@@ -12,6 +12,7 @@ require("mini.bracketed").setup()
 require("mini.notify").setup()
 require("mini.indentscope").setup()
 require("mini.tabline").setup()
+require("mini.statusline").setup()
 require("mini.jump2d").setup()
 require("mini.diff").setup()
 
