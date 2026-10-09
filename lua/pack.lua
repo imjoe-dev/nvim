@@ -66,8 +66,6 @@ require("tree-sitter-manager").setup({
     "go",
     "gosum",
     "gomod",
-    "rust",
     "toml",
-    "typescript",
   }
 })
