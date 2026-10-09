@@ -3,9 +3,13 @@ vim.pack.add({
   "https://github.com/romus204/tree-sitter-manager.nvim",
   "https://github.com/carldaws/miser.nvim",
   "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/nyoom-engineering/oxocarbon.nvim",
 })
 
 local map = vim.keymap.set
+
+vim.opt.background = "dark"
+vim.cmd.colorscheme "oxocarbon"
 
 -- nvim mini simple modules
 require("mini.pairs").setup()
@@ -18,6 +22,23 @@ require("mini.statusline").setup()
 require("mini.jump2d").setup()
 require("mini.diff").setup()
 require("mini.completion").setup()
+
+-- mini extra
+local MiniExtra = require("mini.extra")
+MiniExtra.setup()
+
+local function show_document_symbols()
+  MiniExtra.pickers.lsp({ scope = "document_symbol" })
+end
+
+local function show_document_diagnostics()
+  MiniExtra.pickers.diagnostic({
+    scope = "current",
+  })
+end
+
+map("n", "<leader>go", show_document_symbols, { desc = "show document symbols" })
+map("n", "<leader>dt", show_document_diagnostics, { desc = "show document diagnostics" })
 
 -- mini notify
 local MiniNotify = require("mini.notify")
