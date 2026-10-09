@@ -1,5 +1,6 @@
 vim.pack.add({
   "https://github.com/nvim-mini/mini.nvim",
+  "https://github.com/romus204/tree-sitter-manager.nvim",
 })
 
 local map = vim.keymap.set
@@ -33,3 +34,15 @@ map("n", "<leader>gA", ":Git add .<CR>", { desc = "git add all files" })
 map("n", "<leader>gc", ":Git commit<CR>", { desc = "git commit" })
 map("n", "<leader>gp", ":Git push<CR>", { desc = "git push" })
 map("n", "<leader>gP", ":Git pull<CR>", { desc = "git pull" })
+
+-- treesitter
+require("tree-sitter-manager").setup({
+  ensure_installed = {
+    "go",
+    "gosum",
+    "gomod",
+    "rust",
+    "toml",
+    "typescript",
+  }
+})
