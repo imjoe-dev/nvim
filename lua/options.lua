@@ -44,3 +44,6 @@ vim.diagnostic.config({
   virtual_text = true,
   signs = true,
 })
+
+opt.completeopt = "menuone,noselect,fuzzy,nosort"
+opt.shortmess:append("c")

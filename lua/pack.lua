@@ -12,15 +12,25 @@ require("mini.pairs").setup()
 require("mini.comment").setup()
 require("mini.surround").setup()
 require("mini.bracketed").setup()
-require("mini.notify").setup()
 require("mini.indentscope").setup()
 require("mini.tabline").setup()
 require("mini.statusline").setup()
 require("mini.jump2d").setup()
 require("mini.diff").setup()
+require("mini.completion").setup()
+
+-- mini notify
+local MiniNotify = require("mini.notify")
+MiniNotify.setup({
+  lsp_progress = {
+    level = "WARN"
+  }
+})
 
 -- mini files
 local MiniFiles = require("mini.files")
+MiniFiles.setup()
+
 map("n", "<leader>/", MiniFiles.open, { desc = "open mini files" })
 
 -- mini pick
@@ -44,6 +54,10 @@ require("miser").setup()
 vim.lsp.enable({
   "lua_ls",
   "gopls",
+})
+
+vim.lsp.config("*", {
+  capabilities = require("mini.completion").get_lsp_capabilities()
 })
 
 -- treesitter
