@@ -17,35 +17,46 @@ local function quit()
   vim.cmd("quit")
 end
 
+local function close_others()
+  local current = vim.api.nvim_get_current_buf()
+
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current and vim.api.nvim_buf_is_loaded(buf) then
+      vim.api.nvim_buf_delete(buf, {})
+    end
+  end
+end
+
 map_all("n", {
-  { "<leader>w", ":write<CR>", { desc = "write current buffer" } },
-  { "<leader>h", ":nohlsearch<CR>", { desc = "clean highlight" } },
-  { "<leader>q", quit, { desc = "quit neovim" } },
-  
-  { "<C-h>", "<C-w>h", { desc = "focus left split" } },
-  { "<C-j>", "<C-w>j", { desc = "focus down split" } },
-  { "<C-k>", "<C-w>k", { desc = "focus up split" } },
-  { "<C-l>", "<C-w>l", { desc = "focus right split" } },
+  { "<leader>w",  ":write<CR>",      { desc = "write current buffer" } },
+  { "<leader>h",  ":nohlsearch<CR>", { desc = "clean highlight" } },
+  { "<leader>q",  quit,              { desc = "quit neovim" } },
 
-  { "<C-d>", "<C-d>zz", { desc = "scroll down" } },
-  { "<C-u>", "<C-u>zz", { desc = "scroll up" } },
+  { "<C-h>",      "<C-w>h",          { desc = "focus left split" } },
+  { "<C-j>",      "<C-w>j",          { desc = "focus down split" } },
+  { "<C-k>",      "<C-w>k",          { desc = "focus up split" } },
+  { "<C-l>",      "<C-w>l",          { desc = "focus right split" } },
 
-  { "n", "nzzzv", { desc = "next search" } },
-  { "N", "Nzzzv", { desc = "prev search" } },
+  { "<C-d>",      "<C-d>zz",         { desc = "scroll down" } },
+  { "<C-u>",      "<C-u>zz",         { desc = "scroll up" } },
 
-  { "<leader>Y", '"+Y', { desc = "copy line" } },
-  { "<leader>p", '"+p', { desc = "paste clipboard" } },
+  { "n",          "nzzzv",           { desc = "next search" } },
+  { "N",          "Nzzzv",           { desc = "prev search" } },
 
-  { "<leader>bd", ":bd<CR>", { desc = "close current buffer" }},
+  { "<leader>Y",  '"+Y',             { desc = "copy line" } },
+  { "<leader>p",  '"+p',             { desc = "paste clipboard" } },
+
+  { "<leader>bd", ":bd<CR>",         { desc = "close current buffer" } },
+  { "<leader>bo", close_others,      { desc = "close other buffers" } }
 })
 
 map_all("v", {
   { "J", ":m '>+1<CR>gv=gv", { desc = "move line down" } },
   { "K", ":m '<-2<CR>gv=gv", { desc = "move line up" } },
-  { "<", "<gv", { desc = "indent left" } },
-  { ">", ">gv", { desc = "indent right" } },
+  { "<", "<gv",              { desc = "indent left" } },
+  { ">", ">gv",              { desc = "indent right" } },
 
-  { "p", '"_dP', { desc = "paste" } },
+  { "p", '"_dP',             { desc = "paste" } },
 })
 
 map_all({ "n", "v" }, {
