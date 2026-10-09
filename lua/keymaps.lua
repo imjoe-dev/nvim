@@ -27,27 +27,36 @@ local function close_others()
   end
 end
 
+local function format_code()
+  vim.lsp.buf.format({ async = true })
+end
+
 map_all("n", {
-  { "<leader>w",  ":write<CR>",      { desc = "write current buffer" } },
-  { "<leader>h",  ":nohlsearch<CR>", { desc = "clean highlight" } },
-  { "<leader>q",  quit,              { desc = "quit neovim" } },
+  { "<leader>w",  ":write<CR>",               { desc = "write current buffer" } },
+  { "<leader>h",  ":nohlsearch<CR>",          { desc = "clean highlight" } },
+  { "<leader>q",  quit,                       { desc = "quit neovim" } },
 
-  { "<C-h>",      "<C-w>h",          { desc = "focus left split" } },
-  { "<C-j>",      "<C-w>j",          { desc = "focus down split" } },
-  { "<C-k>",      "<C-w>k",          { desc = "focus up split" } },
-  { "<C-l>",      "<C-w>l",          { desc = "focus right split" } },
+  { "<C-h>",      "<C-w>h",                   { desc = "focus left split" } },
+  { "<C-j>",      "<C-w>j",                   { desc = "focus down split" } },
+  { "<C-k>",      "<C-w>k",                   { desc = "focus up split" } },
+  { "<C-l>",      "<C-w>l",                   { desc = "focus right split" } },
 
-  { "<C-d>",      "<C-d>zz",         { desc = "scroll down" } },
-  { "<C-u>",      "<C-u>zz",         { desc = "scroll up" } },
+  { "<C-d>",      "<C-d>zz",                  { desc = "scroll down" } },
+  { "<C-u>",      "<C-u>zz",                  { desc = "scroll up" } },
 
-  { "n",          "nzzzv",           { desc = "next search" } },
-  { "N",          "Nzzzv",           { desc = "prev search" } },
+  { "n",          "nzzzv",                    { desc = "next search" } },
+  { "N",          "Nzzzv",                    { desc = "prev search" } },
 
-  { "<leader>Y",  '"+Y',             { desc = "copy line" } },
-  { "<leader>p",  '"+p',             { desc = "paste clipboard" } },
+  { "<leader>Y",  '"+Y',                      { desc = "copy line" } },
+  { "<leader>p",  '"+p',                      { desc = "paste clipboard" } },
 
-  { "<leader>bd", ":bd<CR>",         { desc = "close current buffer" } },
-  { "<leader>bo", close_others,      { desc = "close other buffers" } }
+  { "<leader>bd", ":bd<CR>",                  { desc = "close current buffer" } },
+  { "<leader>bo", close_others,               { desc = "close other buffers" } },
+
+  { "<leader>la", vim.lsp.buf.code_action,    { desc = "code action" } },
+  { "<leader>lr", vim.lsp.buf.rename,         { desc = "rename" } },
+  { "<leader>lf", format_code,                { desc = "format" } },
+  { "<leader>lh", vim.lsp.buf.signature_help, { desc = "signature help" } },
 })
 
 map_all("v", {

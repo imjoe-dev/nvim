@@ -37,8 +37,23 @@ local function show_document_diagnostics()
   })
 end
 
-map("n", "<leader>go", show_document_symbols, { desc = "show document symbols" })
-map("n", "<leader>dt", show_document_diagnostics, { desc = "show document diagnostics" })
+local function show_references()
+  MiniExtra.pickers.lsp({ scope = "references" })
+end
+
+local function show_implementation()
+  MiniExtra.pickers.lsp({ scope = "implementation" })
+end
+
+local function show_definition()
+  MiniExtra.pickers.lsp({ scope = "type_definition" })
+end
+
+map("n", "<leader>ls", show_document_symbols, { desc = "show document symbols" })
+map("n", "<leader>lR", show_references, { desc = "show document symbols" })
+map("n", "<leader>li", show_implementation, { desc = "show document symbols" })
+map("n", "<leader>lt", show_definition, { desc = "show document symbols" })
+map("n", "<leader>ld", show_document_diagnostics, { desc = "show document diagnostics" })
 
 -- mini notify
 local MiniNotify = require("mini.notify")
