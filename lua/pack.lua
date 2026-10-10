@@ -67,7 +67,7 @@ MiniNotify.setup({
 local MiniFiles = require("mini.files")
 MiniFiles.setup()
 
-map("n", "<leader>/", MiniFiles.open, { desc = "open mini files" })
+map("n", "-", MiniFiles.open, { desc = "open mini files" })
 
 -- mini pick
 require("mini.pick").setup()
