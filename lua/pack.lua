@@ -1,6 +1,20 @@
+-- nvim-treesitter: el README recomienda `build = ':TSUpdate'` (lazy.nvim).
+-- vim.pack no tiene campo `build`, asi que usamos PackChanged.
+-- Debe registrarse ANTES de vim.pack.add para que corra en la instalacion.
+vim.api.nvim_create_autocmd("PackChanged", {
+  callback = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    if name ~= "nvim-treesitter" then return end
+    if kind == "install" or kind == "update" then
+      if not ev.data.active then vim.cmd.packadd("nvim-treesitter") end
+      vim.cmd("TSUpdate")
+    end
+  end,
+})
+
 vim.pack.add({
   "https://github.com/nvim-mini/mini.nvim",
-  "https://github.com/romus204/tree-sitter-manager.nvim",
+  "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/nyoom-engineering/oxocarbon.nvim",
 })
@@ -92,12 +106,28 @@ vim.lsp.config("*", {
   capabilities = require("mini.completion").get_lsp_capabilities()
 })
 
--- treesitter
-require("tree-sitter-manager").setup({
-  ensure_installed = {
-    "go",
-    "gosum",
-    "gomod",
-    "toml",
-  }
+-- treesitter: parsers
+require("nvim-treesitter").install({
+  "go",
+  "gosum",
+  "gomod",
+  "toml",
+  "lua",
+})
+
+-- treesitter: activar highlighting y folds por filetype
+-- (highlighting NO es automatico en la rama main de nvim-treesitter)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "go", "gomod", "gosum", "toml", "lua" },
+  callback = function()
+    vim.treesitter.start()
+
+    -- folds (abiertos por defecto; usa `za` para plegar/desplegar)
+    vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    vim.wo[0][0].foldmethod = "expr"
+    vim.wo[0][0].foldlevel = 99
+
+    -- indent (experimental)
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
 })
