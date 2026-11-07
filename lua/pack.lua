@@ -1,6 +1,3 @@
--- nvim-treesitter: el README recomienda `build = ':TSUpdate'` (lazy.nvim).
--- vim.pack no tiene campo `build`, asi que usamos PackChanged.
--- Debe registrarse ANTES de vim.pack.add para que corra en la instalacion.
 vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
     local name, kind = ev.data.spec.name, ev.data.kind
@@ -100,6 +97,16 @@ map("n", "<leader>gP", ":Git pull<CR>", { desc = "git pull" })
 vim.lsp.enable({
   "lua_ls",
   "gopls",
+  "rust_analyzer",
+})
+
+-- rust: usar clippy en vez de `cargo check` para los diagnosticos
+vim.lsp.config("rust_analyzer", {
+  settings = {
+    ["rust-analyzer"] = {
+      check = { command = "clippy" },
+    },
+  },
 })
 
 vim.lsp.config("*", {
@@ -113,12 +120,15 @@ require("nvim-treesitter").install({
   "gomod",
   "toml",
   "lua",
+  "rust",
 })
 
 -- treesitter: activar highlighting y folds por filetype
 -- (highlighting NO es automatico en la rama main de nvim-treesitter)
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "go", "gomod", "gosum", "toml", "lua" },
+  pattern = {
+    "go", "gomod", "gosum", "toml", "lua", "rust",
+  },
   callback = function()
     vim.treesitter.start()
 
